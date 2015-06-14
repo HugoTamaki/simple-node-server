@@ -75,10 +75,10 @@ router.route('/contatos/:contato_id')
       if (err)
         res.send(err);
 
-      contato.name = req.body.name;  // update the contato info
-      contato.phone = req.body.phone;
-      contato.operator = req.body.operator;
-      contato.date = req.body.date;
+      req.body.name ? contato.name = req.body.name : null;
+      req.body.phone ? contato.phone = req.body.phone : null;
+      req.body.operator ? contato.operator = req.body.operator : null;
+      req.body.date ? contato.date = req.body.date : null;
 
       // save the bear
       contato.save(function(err) {
@@ -110,6 +110,3 @@ console.log('Magic happens on port ' + port);
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1:27017/angular_app');
-
-
-// HTTParty.put('http://localhost:8080/api/contatos/557cae0654d5940710000005', :body => {name: 'Eduardo'}.to_json, :headers => {'content-type' => 'application/json'})
