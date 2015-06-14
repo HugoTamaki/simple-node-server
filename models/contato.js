@@ -1,4 +1,4 @@
-// app/models/contato.js
+// app/models/contato
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;

@@ -17,6 +17,7 @@ router.get('/', function(req, res) {
 });
 
 var Contato     = require('./models/contato');
+var Operadora   = require('./models/operadora');
 
 // Routes
 
@@ -31,6 +32,77 @@ router.get('/', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
+
+// Operadoras routes
+router.route('/operadoras')
+  // create operadora
+  .post(function(req, res) {
+    var operadora = new Operadora();
+    operadora.name = req.body.name;
+    operadora.code = req.body.code;
+    operadora.category = req.body.category;
+
+    operadora.save(function(err) {
+      if (err)
+        res.send(err);
+
+      res.json({message: 'Operadora criada!'});
+    });
+  })
+
+  .get(function(req, res) {
+    Operadora.find(function(err, operadoras) {
+      if (err)
+        res.send(err);
+
+      res.json(operadoras);
+    })
+  });
+
+router.route('/operadora/:operadora_id')
+  
+  // get one operadora
+  .get(function(req, res) {
+    Operadora.findById(req.params.operadora_id, function(err, operadora) {
+      if (err)
+        res.send(err);
+
+      res.json(operadora);
+    })
+  })
+
+  // update a contato
+  .put(function(req, res) {
+    Operadora.findById(req.params.operadora_id, function(err, operadora) {
+
+      if (err)
+        res.send(err);
+
+      req.body.name ? operadora.name = req.body.name : null;
+      req.body.code ? operadora.code = req.body.code : null;
+      req.body.category ? operadora.category = req.body.category : null;
+
+      operadora.save(function(err) {
+        if (err)
+          res.send(err);
+
+        res.json({ message: 'Operadora atualizada!' });
+      });
+    });
+  })
+
+  .delete(function(req, res) {
+    Operadora.remove({
+      _id: req.params.operadora_id
+    }, function(err, operadora) {
+      if (err)
+        res.send(err);
+
+      res.json({message: 'Operadora apagada!'})
+    })
+  });
+
+// Contatos routes
 router.route('/contatos')
   // create a contato
   .post(function(req, res) {
@@ -101,7 +173,7 @@ router.route('/contatos/:contato_id')
 
       res.json({message: 'Contato apagado!'})
     })
-  })
+  });
 
 app.use('/api', router);
 
