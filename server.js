@@ -2,9 +2,11 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 app.use(bodyParser.urlencoded({extend: true}));
 app.use(bodyParser.json());
+app.use(cors());
 
 var port = process.env.PORT || 8080;
 
@@ -100,8 +102,6 @@ router.route('/contatos/:contato_id')
       res.json({message: 'Contato apagado!'})
     })
   })
-
-
 
 app.use('/api', router);
 

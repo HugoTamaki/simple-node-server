@@ -6,7 +6,11 @@ var Schema = mongoose.Schema;
 var ContatoSchema = new Schema({
   name: String,
   phone: String,
-  operator: String,
+  operator: {
+    name: String,
+    code: String,
+    category: String
+  },
   date: Date
 });
 
