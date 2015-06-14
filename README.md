@@ -25,11 +25,11 @@ Run the server with `mongod` and be sure that the server port and address is the
 You can use Postman, or any other way. I like to test it with HTTParty (ruby gem).
 You can make requisitions in this way.
 
-Post: `HTTParty.post('http://localhost:8080/api/contatos/557cad4954d5940710000001', :body => {name: 'Robson', phone: '8888-9999', operator: 'Oi', date: DateTime.now}.to_json, :headers => {'content-type' => 'application/json'})`
+Post: `HTTParty.post('http://localhost:8080/api/contatos', :body => {name: 'Robson', phone: '8888-9999', operator: {name: 'Oi', code: '21', category: 'Celular'}, date: DateTime.now}.to_json, :headers => {'content-type' => 'application/json'})`
 
 Get: `HTTParty.get('http://localhost:8080/api/contatos/557cad4954d5940710000001')`
 
-Put: `HTTParty.put('http://localhost:8080/api/contatos/557cad4954d5940710000001', :body => {name: 'Robson', phone: '8888-9999', operator: 'Oi', date: DateTime.now}.to_json, :headers => {'content-type' => 'application/json'})`
+Put: `HTTParty.put('http://localhost:8080/api/contatos/557cad4954d5940710000001', :body => {name: 'Robson', phone: '8888-9999', operator: {name: 'Claro', code: '15', category: 'Celular'}, date: DateTime.now}.to_json, :headers => {'content-type' => 'application/json'})`
 
 Delete: `HTTParty.delete.('http://localhost:8080/api/contatos/557cad4954d5940710000001')`
 
